@@ -55,6 +55,7 @@
           </el-col>
         </el-row>
       </el-main>
+      <el-footer><img src="../../assets/img/line.png" alt=""></el-footer>
     </el-container>
   </div>
 
@@ -135,6 +136,17 @@
   }
 
   #login-button {
+    width: 100%;
+  }
+
+  .el-footer {
+    position: absolute;
+    bottom: 200px;
+    padding: 0;
+    z-index: -2;
+  }
+
+  img {
     width: 100%;
   }
 
