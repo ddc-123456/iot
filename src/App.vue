@@ -1,0 +1,57 @@
+<template>
+  <div id="app">
+    <el-container>
+      <el-header>
+        <nav-bar></nav-bar>
+      </el-header>
+      <router-view></router-view>
+      <!--    <button @click="btnClick">点击</button>-->
+    </el-container>
+  </div>
+</template>
+
+<script>
+  import NavBar from "components/navbar/NavBar";
+
+  export default {
+    name: "App",
+    components: {
+      NavBar
+    },
+    created() {
+
+      /*每次刷新时校验登陆状态*/
+      this.checkLogin()
+      this.getVuex()
+    },
+    methods: {
+      getVuex() {
+        this.$store.state.t_name = window.localStorage.getItem('t_name')
+        this.$store.state.t_picture = window.localStorage.getItem('t_picture')
+      },
+
+      /*登陆状态校验*/
+      checkLogin() {
+        this.$api.app.checkLogin().then(res => {
+          res.code === 100 ? this.$store.commit("setShowOfUserBox", true) : this.$store.commit("setShowOfUserBox", false)
+          console.log(res);
+        }).catch(err => {
+          this.$store.commit("setShowOfUserBox", false)
+          console.log(err);
+        })
+      }
+    }
+  }
+</script>
+
+<style>
+  @import "~element-ui/lib/theme-chalk/index.css";
+  @import "assets/css/base.css";
+  @import "assets/css/normalize.css";
+
+  body {
+    overflow-x: hidden;
+    min-width: 1516px;
+  }
+
+</style>
