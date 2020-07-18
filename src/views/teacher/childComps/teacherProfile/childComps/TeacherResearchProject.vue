@@ -1,8 +1,8 @@
 <template>
   <div>
     <teacher-item id="content">
-      <span slot="title-name">研究项目</span>
-      <ul slot="content">
+      <span slot="title-name">科研项目</span>
+      <ol slot="content">
 
         <li v-for="item of t_teacherresearchprojecthortopics">
           <p>{{item.topic}}{{', '+item.money}}{{', '+item.client}}{{', '+item.topic_time}}</p>
@@ -16,7 +16,7 @@
           <p>{{item.topics_name}}{{', '+item.topics_unit}}{{item.topic_time}}</p>
         </li>
 
-      </ul>
+      </ol>
 
     </teacher-item>
   </div>
@@ -41,9 +41,17 @@
     margin-top: 30px;
   }
 
-  ul {
+  ol {
     padding-bottom: 19px;
-    list-style: square;
+    counter-reset: sectioncounter;
+    list-style: none;
+    word-wrap: break-word;
+    /*list-style: square;*/
+  }
+
+  ol > li > p:before {
+    content: '[' counter(sectioncounter) ']';
+    counter-increment: sectioncounter;
   }
 
   li {

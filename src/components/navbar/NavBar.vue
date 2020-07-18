@@ -13,10 +13,10 @@
       </router-link>
     </el-col>
     <!--right-->
-    <el-col :span="2" class="grid-content grid-right" >
+    <el-col :span="2" class="grid-content grid-right">
 
-      <login-use-bbox v-if="$store.state.isShowOfUserBox"/>
-      <p @click="toLogin" v-else>登录</p>
+      <login-use-bbox v-show="$store.state.isShowOfUserBox"/>
+      <p @click="toLogin" v-show="!$store.state.isShowOfUserBox">登录</p>
     </el-col>
   </el-row>
 </template>

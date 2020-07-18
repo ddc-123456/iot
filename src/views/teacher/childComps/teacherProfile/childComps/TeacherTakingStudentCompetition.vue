@@ -4,7 +4,7 @@
     <span slot="title-name">带学生比赛</span>
     <ul slot="content">
       <li v-for="(item,index) of t_teachertakingstudentcompetition" :key="index">
-        {{item.award_grade}},{{item.issuance_Unit}},{{item.award_name}}{{item.award_results}},{{item.issue_time}}
+        [{{index+1}}]{{item.award_grade}},{{item.issuance_Unit}},{{item.award_name}}{{item.award_results}},{{item.issue_time}}
       </li>
     </ul>
   </teacher-item>

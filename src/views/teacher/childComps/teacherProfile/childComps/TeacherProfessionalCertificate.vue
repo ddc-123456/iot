@@ -3,7 +3,9 @@
     <teacher-item id="content">
       <span slot="title-name">职业资格证书</span>
       <ul slot="content">
-        <li v-for="(item,index) of t_teacherprofessionalcertificate" :key="index">{{item.certificate}}</li>
+        <li v-for="(item,index) of t_teacherprofessionalcertificate" :key="index">
+          [{{index+1}}]{{item.certificate}}
+        </li>
       </ul>
     </teacher-item>
   </div>

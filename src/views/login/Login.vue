@@ -77,12 +77,16 @@
         },
       }
     },
+    created() {
+      this.$store.state.loginCode === 100 ? this.$router.push('/index') : null
+    },
     methods: {
       login(t_id, t_pwd) {
         this.$api.login.login(this.t_id, this.t_pwd).then(res => {
           const token = res.token
           const t_name = res.t_name
           const t_picture = res.t_picture
+          const t_id = res.t_id
           if (token == null) {
             alert("登陆失败！账号或密码错误")
           } else {
@@ -96,10 +100,13 @@
             window.localStorage.setItem('token', token)
             window.localStorage.setItem('t_name', t_name)
             window.localStorage.setItem('t_picture', t_picture)
+            window.localStorage.setItem('t_id', t_id)
 
             this.$store.commit('setToken', token)
             this.$store.commit('setName', t_name)
             this.$store.commit('setIcon', t_picture)
+            this.$store.commit('setId', t_id)
+            this.$store.commit('setloginCode', res.code)
 
             this.$store.commit('setShowOfUserBox', true)
 
@@ -160,50 +167,52 @@
     text-align: center;
   }
 
-</style>
-<style>
-  input::-webkit-input-placeholder {
-    color: var(--color-title);
-    text-align: center;
-    line-height: normal;
-  }
 
-  input::-ms-input-placeholder {
-    color: var(--color-title);
-    text-align: center;
-  }
-
-  input::-moz-placeholder {
-    color: var(--color-title) !important;
-    line-height: 40px;
-    /* Firefox 默认的 placeholder 有 opacity:0.4 属性 */
-    text-align: center;
-    opacity: 1;
-
-  }
-
-  .el-input__inner {
-    border-color: var(--color-title);
-  }
-
-  .el-input__inner:hover {
-    border-color: rgba(68, 87, 143, 0);
-    box-shadow: 0 0 5px rgba(68, 87, 143, 0.5);
-    transition: 0.1s ease;
-  }
-
-  .el-input.is-active .el-input__inner, .el-input__inner:focus {
-    border-width: 2px;
-    border-color: var(--color-title);
-    box-shadow: 0 0 5px rgba(68, 87, 143, 0.5);
-    outline: 0;
-  }
-
-  .el-button {
-    background-color: var(--color-title);
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-  }
 
 </style>
+<!--<style >-->
+<!--  input::-webkit-input-placeholder {-->
+<!--    color: var(&#45;&#45;color-title);-->
+<!--    text-align: center;-->
+<!--    line-height: normal;-->
+<!--  }-->
+
+<!--  input::-ms-input-placeholder {-->
+<!--    color: var(&#45;&#45;color-title);-->
+<!--    text-align: center;-->
+<!--  }-->
+
+<!--  input::-moz-placeholder {-->
+<!--    color: var(&#45;&#45;color-title) !important;-->
+<!--    line-height: 40px;-->
+<!--    /* Firefox 默认的 placeholder 有 opacity:0.4 属性 */-->
+<!--    text-align: center;-->
+<!--    opacity: 1;-->
+
+<!--  }-->
+
+<!--  .el-input__inner {-->
+<!--    border-color: var(&#45;&#45;color-title);-->
+<!--  }-->
+
+<!--  .el-input__inner:hover {-->
+<!--    border-color: rgba(68, 87, 143, 0);-->
+<!--    box-shadow: 0 0 5px rgba(68, 87, 143, 0.5);-->
+<!--    transition: 0.1s ease;-->
+<!--  }-->
+
+<!--  .el-input.is-active .el-input__inner, .el-input__inner:focus {-->
+<!--    border-width: 2px;-->
+<!--    border-color: var(&#45;&#45;color-title);-->
+<!--    box-shadow: 0 0 5px rgba(68, 87, 143, 0.5);-->
+<!--    outline: 0;-->
+<!--  }-->
+
+<!--  .el-button {-->
+<!--    background-color: var(&#45;&#45;color-title);-->
+<!--    color: white;-->
+<!--    font-weight: bold;-->
+<!--    font-size: 20px;-->
+<!--  }-->
+
+<!--</style>-->

@@ -9,6 +9,7 @@
           <div id="teacher-profile-main">
             <teacher-personal-introduction :t_personalprofile="t_personalprofile"/>
             <teacher-work-experience :t_workexperience="t_workexperience"/>
+            <teacher-study-experience :t_teacherstudyexperience="t_teacherstudyexperience"/>
             <teacher-professional-certificate :t_teacherprofessionalcertificate="t_teacherprofessionalcertificate"/>
             <teacher-thesis :t_thesis="t_thesis"/>
             <teacher-patent :t_patent="t_patent"/>
@@ -41,10 +42,12 @@
   import TeacherRecord from "./childComps/TeacherRecord";
   import TeacherProfessionalCertificate from "./childComps/TeacherProfessionalCertificate";
   import TeacherSoftwareCopyright from "./childComps/TeacherSoftwareCopyright";
+  import TeacherStudyExperience from "./childComps/TeacherStudyExperience";
 
   export default {
     name: "TeacherProfile",
     components: {
+      TeacherStudyExperience,
       TeacherSoftwareCopyright,
       TeacherProfessionalCertificate,
       TeacherRecord,
@@ -65,6 +68,7 @@
         t_patent: {},
         t_thesis: {},
         t_honour: {},
+        t_teacherstudyexperience:{},
         t_workexperience: '',
         t_teachersoftwarecopyright: {},
         t_teacherprofessionalcertificate: {},
@@ -89,7 +93,6 @@
           this.t_patent = res[1]
           this.t_thesis = res[2]
           this.t_honour = res[3]
-          this.t_workexperience = res[0][0].workexperience
           this.t_teachersoftwarecopyright = res[4]
           this.t_teacherrecord = res[5]
           this.t_teacherprofessionalcertificate = res[6]
@@ -97,6 +100,8 @@
           this.t_teacherresearchprojecthortopics = res[8][0]
           this.t_teacherresearchprojecthortopicsscientificresearch = res[8][1]
           this.t_teacherresearchprojecthortopicsteachingtopics = res[8][2]
+          this.t_teacherstudyexperience = res[9]
+          this.t_workexperience = res[10]
         }).catch(err => {
           console.log(err);
         })

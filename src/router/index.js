@@ -15,6 +15,11 @@ const Student = () => import('views/student/Student')
 const Login = () => import('views/login/Login')
 const Register = () => import('views/register/Register')
 const TeacherProfile = () => import('views/teacher/childComps/teacherProfile/TeacherProfile')
+const Profile = () => import('views/profile/Profile')
+const PersonalCourse = () => import('views/profile/childComps/ProfileMainCourse')
+const PersonalProfile = () => import('views/profile/childComps/ProfileMainPersonalProfile')
+const PersonalHomePage = () => import('views/profile/childComps/ProfileMainHomePage')
+const PersonalPasswordManager = () => import('views/profile/childComps/ProfileMainPassWordManager')
 
 const routes = [
   {
@@ -79,6 +84,32 @@ const routes = [
   {
     path: '/register',
     component: Register,
+  },
+  {
+    path: '/profile',
+    component: Profile,
+    children: [
+      {
+        path: '',
+        redirect:'PersonalCourse'
+      },
+      {
+        path: 'PersonalCourse',
+        component: PersonalCourse
+      },
+      {
+        path: 'PersonalProfile',
+        component: PersonalProfile
+      },
+      {
+        path: 'PersonalHomePage',
+        component: PersonalHomePage
+      },
+      {
+        path: 'PersonalPasswordManager',
+        component: PersonalPasswordManager
+      }
+    ]
   }
 ]
 

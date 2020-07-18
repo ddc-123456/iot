@@ -34,16 +34,19 @@
       handleCommand(command) {
         switch (command) {
           case 'personalCentre' :
+            this.$router.push('/profile')
             break;
 
           case 'exit' :
-            window.localStorage.setItem("token",'666') //token不能为空，不能为null
-            this.$store.commit('setShowOfUserBox',false)
+            window.localStorage.setItem("token", '666') //token不能为空，不能为null
+            this.$store.commit('setShowOfUserBox', false)
+            this.$store.commit('setloginCode',1)
             this.$message('用户：' + this.t_name + ' 已退出');
+            this.$router.push('/login')
             break;
         }
       },
-      checkLogin(){
+      checkLogin() {
         this.t_name = this.$store.state.t_name
         this.t_picture = this.$store.state.t_picture
       }

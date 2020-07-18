@@ -3,7 +3,7 @@
     <teacher-item id="content">
       <span slot="title-name">工作记录</span>
       <ul slot="content">
-        <li v-for="(item,index) of t_teacherrecord">{{item.work_date}}{{item.work_name}},{{item.exposition}}</li>
+        <li v-for="(item,index) of t_teacherrecord" :key="index">[{{index+1}}]{{item.work_date}}{{item.work_name}},{{item.exposition}}</li>
       </ul>
     </teacher-item>
   </div>

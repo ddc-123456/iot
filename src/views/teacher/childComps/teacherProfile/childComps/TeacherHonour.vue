@@ -4,7 +4,7 @@
       <span slot="title-name">个人荣誉</span>
       <ul slot="content">
         <li v-for="(item,index) of t_honour" :key="index">
-          <p>{{item.issue_time}}{{item.issuance_Unit}}{{item.honour_name}}{{item.results}}</p>
+          <p>[{{index+1}}]{{item.issue_time}}{{item.issuance_Unit}}{{item.honour_name}}{{item.results}}</p>
         </li>
       </ul>
     </teacher-item>
