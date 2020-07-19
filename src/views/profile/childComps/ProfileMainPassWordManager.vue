@@ -41,7 +41,6 @@
 
         </el-row>
 
-
       </el-col>
     </el-row>
   </div>
@@ -60,6 +59,9 @@
     },
     methods: {
       toChangePassword() {
+
+        const rule = /[^ ]/
+
         if (this.t_pwd !== this.t_pwd_check) {
           this.$message({
             message: '两次密码不一样！',
@@ -67,6 +69,8 @@
           })
         } else if (this.t_pwd === '' || this.pwd === '') {
           this.$message.error('输入值为空！')
+        } else if (!rule.test(this.t_pwd)) {
+          this.$message.error('密码不能有空格！')
         } else this.$api.ProfileMainPassWordManager.toChangePassword(this.t_id, this.pwd, this.t_pwd).then(res => {
           switch (res.code) {
             case 200 :
@@ -74,6 +78,7 @@
               this.pwd = ''
               this.t_pwd = ''
               this.t_pwd_check = ''
+              this.$router.push('/login')
               break;
 
             case 404 :
@@ -84,7 +89,6 @@
               this.$message.error('服务器未知错误')
               break;
           }
-          console.log(res);
         }).catch(err => {
           this.$message.error('服务器未知错误')
         })
@@ -98,13 +102,11 @@
     background-color: #fff;
     padding-bottom: 50px;
     margin-top: 30px;
-
   }
 
   .content {
     margin-top: 30px;
   }
-
 
   span {
     line-height: 40px;
