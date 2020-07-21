@@ -95,19 +95,23 @@ const routes = [
       },
       {
         path: 'PersonalCourse',
-        component: PersonalCourse
+        component: PersonalCourse,
+        name:'PersonalCourse'
       },
       {
         path: 'PersonalProfile',
-        component: PersonalProfile
+        component: PersonalProfile,
+        name:'PersonalProfile'
       },
       {
         path: 'PersonalHomePage',
-        component: PersonalHomePage
+        component: PersonalHomePage,
+        name:'PersonalHomePage'
       },
       {
         path: 'PersonalPasswordManager',
-        component: PersonalPasswordManager
+        component: PersonalPasswordManager,
+        name:'PersonalPasswordManager'
       }
     ]
   }

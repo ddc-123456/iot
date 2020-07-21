@@ -2,9 +2,9 @@
   <div class="tab-bar-box">
     <div class="img-box"><span>师资风采</span></div>
     <ul>
-      <li :class="{active:active === 0}" @click="scrollTo(0)">师资简介</li>
-      <li :class="{active:active === 1}" @click="scrollTo(1)">专任教师</li>
-      <li :class="{active:active === 2}" @click="scrollTo(2)">兼职教师</li>
+      <li :class="{active:active === 0}" @click="scrollTo(1)">师资简介</li>
+      <li :class="{active:active === 1}" @click="scrollTo(2)">专任教师</li>
+      <li :class="{active:active === 2}" @click="scrollTo(3)">兼职教师</li>
     </ul>
   </div>
 </template>

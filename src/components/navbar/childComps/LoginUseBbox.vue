@@ -4,11 +4,11 @@
       <el-dropdown @command="handleCommand">
 
         <el-col :span="12">
-          <img :src="$url+t_picture" alt="">
+          <img :src="$url+$store.state.t_picture" alt="">
         </el-col>
 
         <el-col :span="12">
-          <span>{{t_name}}</span>
+          <span>{{$store.state.t_name}}</span>
         </el-col>
 
         <el-dropdown-menu slot="dropdown">
@@ -40,19 +40,12 @@
           case 'exit' :
             window.localStorage.setItem("token", '666') //token不能为空，不能为null
             this.$store.commit('setShowOfUserBox', false)
-            this.$store.commit('setloginCode',1)
+            this.$store.commit('setloginCode', 1)
             this.$message('用户：' + this.t_name + ' 已退出');
             this.$router.push('/login')
             break;
         }
-      },
-      checkLogin() {
-        this.t_name = this.$store.state.t_name
-        this.t_picture = this.$store.state.t_picture
       }
-    },
-    mounted() {
-      this.checkLogin()
     }
   }
 </script>

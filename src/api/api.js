@@ -9,6 +9,7 @@ import teacher from "./teacher";
 import teacherProfile from "./teacherProfile";
 import app from "./app"
 import ProfileMainPassWordManager from "./ProfileMainPassWordManager";
+import ProfileMainPersonalProfile from "./ProfileMainPersonalProfile";
 
 export default {
   login,
@@ -16,5 +17,6 @@ export default {
   teacher,
   teacherProfile,
   app,
-  ProfileMainPassWordManager
+  ProfileMainPassWordManager,
+  ProfileMainPersonalProfile
 }

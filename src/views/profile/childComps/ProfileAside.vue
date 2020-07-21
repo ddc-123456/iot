@@ -6,16 +6,18 @@
     </div>
     <ul>
       <li>
-        <router-link to="/profile/PersonalCourse"><span>我的课程</span></router-link>
+        <router-link to="/profile/PersonalCourse" :class="{'active':activeIndex === 'PersonalCourse'}"><span>我的课程</span></router-link>
       </li>
       <li>
-        <router-link to="/profile/PersonalProfile"><span>个人信息</span></router-link>
+        <router-link to="/profile/PersonalProfile" :class="{'active':activeIndex === 'PersonalProfile'}"><span>个人信息</span></router-link>
       </li>
       <li>
-        <router-link to="/profile/PersonalHomePage"><span>个人主页</span></router-link>
+        <router-link to="/profile/PersonalHomePage" :class="{'active':activeIndex === 'PersonalHomePage'}"><span>个人主页</span>
+        </router-link>
       </li>
       <li>
-        <router-link to="/profile/PersonalPasswordManager"><span>密码管理</span></router-link>
+        <router-link to="/profile/PersonalPasswordManager" :class="{'active':activeIndex === 'PersonalPasswordManager'}"><span>密码管理</span>
+        </router-link>
       </li>
     </ul>
   </div>
@@ -27,9 +29,15 @@
     data() {
       return {
         t_name: this.$store.state.t_name,
-        t_picture: this.$store.state.t_picture
+        t_picture: this.$store.state.t_picture,
+        activeIndex: 'PersonalCourse'
       }
     },
+    watch: {
+      '$route'(to, from) {
+        this.activeIndex = this.$route.name
+      }
+    }
   }
 </script>
 
@@ -68,5 +76,9 @@
 
   #profile-aside li > span {
     cursor: pointer;
+  }
+
+  .active {
+    color: var(--color-title);
   }
 </style>

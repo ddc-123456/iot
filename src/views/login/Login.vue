@@ -168,51 +168,56 @@
   }
 
 
+</style>
+<style>
+  #login input::-webkit-input-placeholder {
+    color: var(--color-title);
+    text-align: center;
+    line-height: normal;
+  }
+
+  #login input::-ms-input-placeholder {
+    color: var(--color-title);
+    text-align: center;
+  }
+
+  #login input::-moz-placeholder {
+    color: var(--color-title) !important;
+    line-height: 40px;
+    /* Firefox 默认的 placeholder 有 opacity:0.4 属性 */
+    text-align: center;
+    opacity: 1;
+
+  }
+
+  #login .el-input__inner {
+    border-color: var(--color-title);
+  }
+
+  #login .el-input__inner:hover {
+    border-color: rgba(68, 87, 143, 0);
+    box-shadow: 0 0 5px rgba(68, 87, 143, 0.5);
+    transition: 0.1s ease;
+  }
+
+  #login .el-input.is-active .el-input__inner, #login .el-input__inner:focus {
+    border-width: 2px;
+    border-color: var(--color-title);
+    box-shadow: 0 0 5px rgba(68, 87, 143, 0.5);
+    outline: 0;
+  }
+
+  #login .el-button {
+    background-color: var(--color-title);
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  #login .el-button:focus, #login .el-button:hover {
+    color: var(--color-title);
+    background-color: #fff;
+    border-color: var(--color-title);
+  }
 
 </style>
-<!--<style >-->
-<!--  input::-webkit-input-placeholder {-->
-<!--    color: var(&#45;&#45;color-title);-->
-<!--    text-align: center;-->
-<!--    line-height: normal;-->
-<!--  }-->
-
-<!--  input::-ms-input-placeholder {-->
-<!--    color: var(&#45;&#45;color-title);-->
-<!--    text-align: center;-->
-<!--  }-->
-
-<!--  input::-moz-placeholder {-->
-<!--    color: var(&#45;&#45;color-title) !important;-->
-<!--    line-height: 40px;-->
-<!--    /* Firefox 默认的 placeholder 有 opacity:0.4 属性 */-->
-<!--    text-align: center;-->
-<!--    opacity: 1;-->
-
-<!--  }-->
-
-<!--  .el-input__inner {-->
-<!--    border-color: var(&#45;&#45;color-title);-->
-<!--  }-->
-
-<!--  .el-input__inner:hover {-->
-<!--    border-color: rgba(68, 87, 143, 0);-->
-<!--    box-shadow: 0 0 5px rgba(68, 87, 143, 0.5);-->
-<!--    transition: 0.1s ease;-->
-<!--  }-->
-
-<!--  .el-input.is-active .el-input__inner, .el-input__inner:focus {-->
-<!--    border-width: 2px;-->
-<!--    border-color: var(&#45;&#45;color-title);-->
-<!--    box-shadow: 0 0 5px rgba(68, 87, 143, 0.5);-->
-<!--    outline: 0;-->
-<!--  }-->
-
-<!--  .el-button {-->
-<!--    background-color: var(&#45;&#45;color-title);-->
-<!--    color: white;-->
-<!--    font-weight: bold;-->
-<!--    font-size: 20px;-->
-<!--  }-->
-
-<!--</style>-->
