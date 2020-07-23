@@ -68,8 +68,8 @@
     name: "Login",
     data() {
       return {
-        t_id: '',
-        t_pwd: '',
+        t_id: '2003082802',
+        t_pwd: '123',
         model: '0',
         autoLogin: {
           type: Boolean,

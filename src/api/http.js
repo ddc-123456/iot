@@ -26,7 +26,7 @@ import qs from 'qs'
 */
 // axios.defaults.baseURL = 'http://120.78.153.151:8080/ssm' /*生产时url*/
 axios.defaults.baseURL = '/api'  /*开发时url*/
-axios.defaults.timeout = 10000
+// axios.defaults.timeout = 1000000
 axios.defaults.withCredentials = true
 
 /*

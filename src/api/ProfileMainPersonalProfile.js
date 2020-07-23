@@ -24,10 +24,14 @@ function postProfile(t_name, t_sex, t_id, t_birthday, t_email, t_phone, t_educat
   })
 }
 
-function BatchExport(formData) {
-  return axios.post('/TeacherElegant/fileupload', formData, {
+function BatchExport(formData,getComplete) {
+  return axios.post('/profile/upload', formData, {
     headers: {
       "Content-Type": "multipart/form-data;charset=UTF-8"
+    },
+    onUploadProgress: function (progressEvent) {
+      let complete = (progressEvent.loaded  / progressEvent.total * 100 | 0) + "%"
+      getComplete(complete)
     }
   })
 }

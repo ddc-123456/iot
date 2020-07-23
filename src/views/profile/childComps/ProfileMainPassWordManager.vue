@@ -36,7 +36,7 @@
             <el-button @click="toChangePassword"><p>确认</p></el-button>
           </el-col>
           <el-col :span="12">
-            <el-button><p>取消</p></el-button>
+            <el-button @click="cancel"><p>取消</p></el-button>
           </el-col>
 
         </el-row>
@@ -92,6 +92,12 @@
         }).catch(err => {
           this.$message.error('服务器未知错误')
         })
+      },
+
+      cancel(){
+        this.pwd = ''
+        this.t_pwd = ''
+        this.t_pwd_check = ''
       }
     }
   }

@@ -1,25 +1,40 @@
 <template>
   <div id="profile-aside">
     <div class="img-box">
-      <img :src="$url+ t_picture" alt="">
+      <img :src="$url+ t_picture" alt="" @click="dialogVisible = true">
       <p>{{t_name}}</p>
     </div>
     <ul>
       <li>
-        <router-link to="/profile/PersonalCourse" :class="{'active':activeIndex === 'PersonalCourse'}"><span>我的课程</span></router-link>
-      </li>
-      <li>
-        <router-link to="/profile/PersonalProfile" :class="{'active':activeIndex === 'PersonalProfile'}"><span>个人信息</span></router-link>
-      </li>
-      <li>
-        <router-link to="/profile/PersonalHomePage" :class="{'active':activeIndex === 'PersonalHomePage'}"><span>个人主页</span>
+        <router-link to="/profile/PersonalCourse" :class="{'active':activeIndex === 'PersonalCourse'}"><span>我的课程</span>
         </router-link>
       </li>
       <li>
-        <router-link to="/profile/PersonalPasswordManager" :class="{'active':activeIndex === 'PersonalPasswordManager'}"><span>密码管理</span>
+        <router-link to="/profile/PersonalProfile" :class="{'active':activeIndex === 'PersonalProfile'}">
+          <span>个人信息</span></router-link>
+      </li>
+      <li>
+        <router-link to="/profile/PersonalHomePage" :class="{'active':activeIndex === 'PersonalHomePage'}">
+          <span>个人主页</span>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/profile/PersonalPasswordManager"
+                     :class="{'active':activeIndex === 'PersonalPasswordManager'}"><span>密码管理</span>
         </router-link>
       </li>
     </ul>
+
+    <el-dialog
+      title="修改头像"
+      :visible.sync="dialogVisible"
+      width="60%"
+      :before-close="handleClose">
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -30,7 +45,18 @@
       return {
         t_name: this.$store.state.t_name,
         t_picture: this.$store.state.t_picture,
-        activeIndex: 'PersonalCourse'
+        activeIndex: 'PersonalCourse',
+        dialogVisible: false
+      }
+    },
+    methods: {
+      handleClose(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {
+          });
       }
     },
     watch: {

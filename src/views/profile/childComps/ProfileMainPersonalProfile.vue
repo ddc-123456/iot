@@ -75,7 +75,7 @@
             </el-select>
           </el-col>
           <el-col :span="1">
-            <profile-main-upload-button :id="0"/>
+            <profile-main-upload-button :mode="0"/>
           </el-col>
 
         </el-row>
@@ -109,7 +109,7 @@
             </el-select>
           </el-col>
           <el-col :span="1">
-            <profile-main-upload-button :id="1"/>
+            <profile-main-upload-button :mode="1"/>
           </el-col>
 
         </el-row>
@@ -144,7 +144,7 @@
             </el-select>
           </el-col>
           <el-col :span="1">
-            <profile-main-upload-button :id="2"/>
+            <profile-main-upload-button :mode="2"/>
           </el-col>
 
         </el-row>
@@ -301,6 +301,7 @@
           this.t_title,
           this.t_department,
           this.t_specialtyName).then(res => {
+            this.$message.success('资料已提交')
         }).catch(err => {
           console.log(err);
         })
