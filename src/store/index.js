@@ -39,6 +39,10 @@ export default new Vuex.Store({
     }
   },
   actions: {},
-  getters: {},
+  getters: {
+    getIconAndTime(state) {
+      return state.t_picture + '?t=' + (new Date().getTime())
+    }
+  },
   modules: {}
 })

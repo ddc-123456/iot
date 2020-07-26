@@ -4,7 +4,7 @@
       <el-dropdown @command="handleCommand">
 
         <el-col :span="12">
-          <img :src="$url+$store.state.t_picture" alt="">
+          <img :src="$url+$store.getters.getIconAndTime" alt="">
         </el-col>
 
         <el-col :span="12">

@@ -26,14 +26,14 @@
     },
     methods: {
       getVuex() {
-        this.$store.state.t_name = window.localStorage.getItem('t_name')
-        this.$store.state.t_picture = window.localStorage.getItem('t_picture')
-        this.$store.state.t_id = window.localStorage.getItem('t_id')
+        this.$store.commit('setName',window.localStorage.getItem('t_name'))
+        this.$store.commit('setIcon',window.localStorage.getItem('t_picture'))
+        this.$store.commit('setId',window.localStorage.getItem('t_id'))
       },
 
       /*登陆状态校验*/
-      checkLogin() {
-        this.$api.app.checkLogin().then(res => {
+      async checkLogin() {
+        await this.$api.app.checkLogin().then(res => {
           this.$store.commit("setloginCode",res.code)
           res.code === 100 ? this.$store.commit("setShowOfUserBox", true) : this.$store.commit("setShowOfUserBox", false)
         }).catch(err => {

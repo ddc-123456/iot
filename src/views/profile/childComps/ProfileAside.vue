@@ -1,17 +1,20 @@
 <template>
   <div id="profile-aside">
     <div class="img-box">
-      <img :src="$url+ t_picture" alt="" @click="dialogVisible = true">
+<!--      <img :src="$url+$store.state.t_picture" alt="" @click="dialogVisible = true" :key="picture">-->
+      <el-image :src="$url+$store.getters.getIconAndTime" alt="" @click="dialogVisible = true"/>
       <p>{{t_name}}</p>
     </div>
     <ul>
       <li>
-        <router-link to="/profile/PersonalCourse" :class="{'active':activeIndex === 'PersonalCourse'}"><span>我的课程</span>
+        <router-link to="/profile/PersonalCourse" :class="{'active':activeIndex === 'PersonalCourse'}">
+          <span>我的课程</span>
         </router-link>
       </li>
       <li>
         <router-link to="/profile/PersonalProfile" :class="{'active':activeIndex === 'PersonalProfile'}">
-          <span>个人信息</span></router-link>
+          <span>个人信息</span>
+        </router-link>
       </li>
       <li>
         <router-link to="/profile/PersonalHomePage" :class="{'active':activeIndex === 'PersonalHomePage'}">
@@ -28,25 +31,31 @@
     <el-dialog
       title="修改头像"
       :visible.sync="dialogVisible"
-      width="60%"
+      width="39%"
+      top="5vh"
       :before-close="handleClose">
+      <upload-picture ref="uploadPicture"  v-loading="loading"/>
       <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+    <el-button type="primary" @click="getImg">提交修改</el-button>
   </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
+  import UploadPicture from "../../../common/uploadPicture";
+
   export default {
     name: "ProfileAside",
+    components: {UploadPicture},
     data() {
       return {
         t_name: this.$store.state.t_name,
-        t_picture: this.$store.state.t_picture,
         activeIndex: 'PersonalCourse',
-        dialogVisible: false
+        dialogVisible: false,
+        loading: false,
+
       }
     },
     methods: {
@@ -57,12 +66,37 @@
           })
           .catch(_ => {
           });
+      },
+
+      getImg() {
+        this.loading = true
+        let icon = this.$refs.uploadPicture.getImg()
+        if (!icon) return this.$message.warning('未选择图片')
+
+        this.$api.profile.sendIcon(this.$store.state.t_id, icon, complete => {
+          console.log(complete)
+        }).then(res => {
+          if (res.code !== 200) {
+            this.$message.error('图片上传失败，请检查网络')
+            this.loading = false
+
+            return
+          }
+          this.loading = false
+          this.dialogVisible = false
+          this.$store.commit('setIcon', res.path)
+
+          this.$router.go(0)
+          console.log(res);
+        }).catch(err => {
+          console.log(err);
+        })
       }
     },
     watch: {
       '$route'(to, from) {
         this.activeIndex = this.$route.name
-      }
+      },
     }
   }
 </script>
@@ -79,7 +113,7 @@
     padding: 25px;
   }
 
-  .img-box img {
+  .img-box .el-image {
     width: 100%;
     border: 5px solid #bebebe;
   }
@@ -107,4 +141,5 @@
   .active {
     color: var(--color-title);
   }
+
 </style>

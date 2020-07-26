@@ -40,7 +40,7 @@
 
               <!--忘记密码-->
               <el-col :span="5">
-                <small>忘记密码？</small>
+<!--                <small>忘记密码？</small>-->
               </el-col>
 
             </el-row>
@@ -55,7 +55,7 @@
           </el-col>
         </el-row>
       </el-main>
-      <el-footer><img src="../../assets/img/line.png" alt=""></el-footer>
+      <el-footer><!--<img src="../../assets/img/line.png" alt="">--></el-footer>
     </el-container>
   </div>
 
@@ -77,7 +77,8 @@
         },
       }
     },
-    created() {
+    mounted() {
+      console.log('跳转到首页'+this.$store.state.loginCode);
       this.$store.state.loginCode === 100 ? this.$router.push('/index') : null
     },
     methods: {
@@ -92,7 +93,7 @@
           } else {
 
             this.$message({
-              message: '登陆成功！',
+              message: '登录成功！',
               type: 'success'
             })
 

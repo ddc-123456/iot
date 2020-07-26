@@ -1,5 +1,6 @@
 import axios from './http'
 
+
 function getTeacherProfile(t_id) {
   return axios.post('/profile/teaProfile', {
     t_id
@@ -36,8 +37,30 @@ function BatchExport(formData,getComplete) {
   })
 }
 
+function toChangePassword(t_id, pwd, t_pwd) {
+  return axios.post('/profile/updatePwd', {
+    t_id,
+    pwd,
+    t_pwd
+  })
+}
+
+function sendIcon(t_id, base64,getComplete) {
+  return axios.post('/account/icon', {
+    t_id,
+    base64
+  },{
+    onUploadProgress: function (progressEvent) {
+      let complete = (progressEvent.loaded  / progressEvent.total * 100 | 0)
+      getComplete(complete)
+    }
+  })
+}
+
 export default {
+  sendIcon,
   getTeacherProfile,
   postProfile,
-  BatchExport
+  BatchExport,
+  toChangePassword
 }

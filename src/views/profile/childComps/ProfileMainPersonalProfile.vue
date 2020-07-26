@@ -236,7 +236,7 @@
     },
     methods: {
       getTeacherProfile() {
-        this.$api.ProfileMainPersonalProfile.getTeacherProfile(this.$store.state.t_id).then(res => {
+        this.$api.profile.getTeacherProfile(this.$store.state.t_id).then(res => {
           this.t_name = res.teacher.t_name
           this.t_sex = res.teacher.t_sex
           this.t_id = res.teacher.t_id
@@ -264,7 +264,7 @@
       },
 
       cancel() {
-        this.$api.ProfileMainPersonalProfile.getTeacherProfile(this.$store.state.t_id).then(res => {
+        this.$api.profile.getTeacherProfile(this.$store.state.t_id).then(res => {
           this.t_name = res.teacher.t_name
           this.t_sex = res.teacher.t_sex
           this.t_id = res.teacher.t_id
@@ -287,7 +287,7 @@
       },
 
       postProfile() {
-        this.$api.ProfileMainPersonalProfile.postProfile(
+        this.$api.profile.postProfile(
           this.t_name,
           this.t_sex,
           this.t_id,

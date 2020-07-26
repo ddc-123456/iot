@@ -5,8 +5,10 @@
 </template>
 
 <script>
+  import UploadPicture from "../../common/uploadPicture";
   export default {
-    name: "Feature"
+    name: "Feature",
+    components: {UploadPicture}
   }
 </script>
 

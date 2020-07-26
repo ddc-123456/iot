@@ -17,7 +17,7 @@
             <span>新密码：</span>
           </el-col>
           <el-col :span="17">
-            <el-input v-model="t_pwd"/>
+            <el-input v-model="t_pwd" show-password/>
           </el-col>
         </el-row>
 
@@ -26,7 +26,7 @@
             <span>确认新密码：</span>
           </el-col>
           <el-col :span="17">
-            <el-input v-model="t_pwd_check"/>
+            <el-input v-model="t_pwd_check" show-password/>
           </el-col>
         </el-row>
 
@@ -71,7 +71,7 @@
           this.$message.error('输入值为空！')
         } else if (!rule.test(this.t_pwd)) {
           this.$message.error('密码不能有空格！')
-        } else this.$api.ProfileMainPassWordManager.toChangePassword(this.t_id, this.pwd, this.t_pwd).then(res => {
+        } else this.$api.profile.toChangePassword(this.t_id, this.pwd, this.t_pwd).then(res => {
           switch (res.code) {
             case 200 :
               this.$message.success('修改成功')

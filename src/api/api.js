@@ -8,8 +8,7 @@ import index from "./index"
 import teacher from "./teacher";
 import teacherProfile from "./teacherProfile";
 import app from "./app"
-import ProfileMainPassWordManager from "./ProfileMainPassWordManager";
-import ProfileMainPersonalProfile from "./ProfileMainPersonalProfile";
+import profile from "./profile";
 
 export default {
   login,
@@ -17,6 +16,5 @@ export default {
   teacher,
   teacherProfile,
   app,
-  ProfileMainPassWordManager,
-  ProfileMainPersonalProfile
+  profile
 }
