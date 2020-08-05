@@ -1,6 +1,6 @@
 <template>
   <div>
-    <teacher-item id="content">
+    <teacher-item id="content" :table="table">
       <span slot="title-name">科研项目</span>
       <ol slot="content">
 
@@ -28,6 +28,11 @@
   export default {
     name: "TeacherResearchProject",
     components: {TeacherItem},
+    data(){
+      return{
+        table:['hortopics','scientific_research','teaching_topics']
+      }
+    },
     props: {
       t_teacherresearchprojecthortopics: {},
       t_teacherresearchprojecthortopicsscientificresearch: {},

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <teacher-item id="content">
+    <teacher-item id="content" :table="table">
       <span slot="title-name">学习经历</span>
       <ul slot="content">
         <li v-for="(item,index) of t_teacherstudyexperience">
@@ -18,8 +18,13 @@
     name: "TeacherStudyExperience",
     components: {TeacherItem},
     props:{
-      t_teacherstudyexperience:{}
-    }
+      t_teacherstudyexperience:{},
+    },
+    data(){
+      return{
+        table:['learning_experience']
+      }
+    },
   }
 </script>
 

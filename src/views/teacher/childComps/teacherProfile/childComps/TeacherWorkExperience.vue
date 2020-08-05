@@ -1,6 +1,6 @@
 <template>
   <div>
-    <teacher-item id="content">
+    <teacher-item id="content" :table="table">
       <span slot="title-name">工作经历</span>
       <ul slot="content">
         <li v-for="(item,index) of t_workexperience">
@@ -17,6 +17,11 @@
   export default {
     name: "TeacherWorkExperience",
     components: {TeacherItem},
+    data(){
+      return{
+        table:['work_experience']
+      }
+    },
     props: {
       t_workexperience: ''
     }

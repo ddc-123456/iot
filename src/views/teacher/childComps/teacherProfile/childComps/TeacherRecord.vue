@@ -1,6 +1,6 @@
 <template>
   <div>
-    <teacher-item id="content">
+    <teacher-item id="content" table="work_record">
       <span slot="title-name">工作记录</span>
       <ul slot="content">
         <li v-for="(item,index) of t_teacherrecord" :key="index">[{{index+1}}]{{item.work_date}}{{item.work_name}},{{item.exposition}}</li>

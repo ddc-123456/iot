@@ -79,7 +79,7 @@
     },
     mounted() {
       console.log('跳转到首页'+this.$store.state.loginCode);
-      this.$store.state.loginCode === 100 ? this.$router.push('/index') : null
+      // this.$store.state.loginCode === 100 ? this.$router.push('/index') : null
     },
     methods: {
       login(t_id, t_pwd) {

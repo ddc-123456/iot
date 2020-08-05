@@ -13,9 +13,14 @@
   export default {
     name: "TeacherIntroduction",
     components: {TeacherItem},
+    data(){
+      return{
+        teacher:'teacher'
+      }
+    },
     props: {
       teacherIntroduction: ''
-    }
+    },
   }
 </script>
 

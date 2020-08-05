@@ -6,21 +6,21 @@
         <el-row>
 
           <el-col :span="3">
-            <p>姓名：</p>
+            <span>姓名：</span>
           </el-col>
           <el-col :span="3">
             <el-input v-model="t_name"/>
           </el-col>
 
           <el-col :span="3">
-            <p>性别：</p>
+            <span>性别：</span>
           </el-col>
           <el-col :span="1">
             <p>{{t_sex}}</p>
           </el-col>
 
           <el-col :span="3">
-            <p>工号：</p>
+            <span>工号：</span>
           </el-col>
           <el-col :span="3">
             <p>{{t_id}}</p>
@@ -32,7 +32,7 @@
         <el-row>
 
           <el-col :span="3">
-            <p>出生日期：</p>
+            <span>出生日期：</span>
           </el-col>
           <el-col :span="6">
             <el-date-picker
@@ -157,6 +157,8 @@
           <el-col :span="6">
             <el-select
               v-model="t_department"
+              @change="specialtySelect"
+              :loading="departmentLoading"
               style="width: 100%">
               <el-option v-for="(item,index) of departmentList"
                          :key="index"
@@ -181,11 +183,11 @@
         </el-row>
         <el-row>
           <el-col :span="8">
-            <el-button @click="postProfile">确认修改</el-button>
+            <el-button @click="postProfile" type="primary">确认修改</el-button>
           </el-col>
 
           <el-col :span="7">
-            <el-button @click="cancel">取消</el-button>
+            <el-button @click="cancel" type="primary">取消</el-button>
           </el-col>
         </el-row>
 
@@ -224,6 +226,7 @@
         positional_title_List: {},
         departmentList: {},
         specialtyList: {},
+        departmentLoading: false,
         pickerOptions: {
           disabledDate(time) {
             return time.getTime() > Date.now();
@@ -237,6 +240,7 @@
     methods: {
       getTeacherProfile() {
         this.$api.profile.getTeacherProfile(this.$store.state.t_id).then(res => {
+          console.log(res);
           this.t_name = res.teacher.t_name
           this.t_sex = res.teacher.t_sex
           this.t_id = res.teacher.t_id
@@ -255,8 +259,8 @@
           this.degreeList = res.degrees
           this.stationList = res.stations
           this.positional_title_List = res.positionaltitles
-          this.departmentList = res.departments
-          this.specialtyList = res.specialties
+          this.departmentList = res.departSpecia
+          this.getSpecialtyList()
         }).catch(err => {
           this.$message.error('网络状态异常，请检查网络设备')
           console.log(err);
@@ -286,6 +290,33 @@
         })
       },
 
+      specialtySelect(value) {
+        this.departmentLoading = true
+
+        if (value === '') {
+          this.departmentLoading = false
+          return this.$message.error('服务器未知错误')
+        }
+
+        for (let item of this.departmentList) {
+          if (item.t_department === value) {
+            this.specialtyList = item.specialtyName
+            this.t_specialtyName = item.specialtyName[0].specialtyName
+            this.departmentLoading = false
+            break
+          }
+        }
+      },
+
+      getSpecialtyList(){
+        for (let item of this.departmentList) {
+          if (item.t_department === this.t_department) {
+            this.specialtyList = item.specialtyName
+            break
+          }
+        }
+      },
+
       postProfile() {
         this.$api.profile.postProfile(
           this.t_name,
@@ -301,7 +332,7 @@
           this.t_title,
           this.t_department,
           this.t_specialtyName).then(res => {
-            this.$message.success('资料已提交')
+          this.$message.success('资料已提交')
         }).catch(err => {
           console.log(err);
         })
@@ -316,6 +347,11 @@
     /*padding-bottom: 50px;*/
     margin-top: 30px;
     overflow-x: hidden;
+  }
+
+  #container span {
+    color: black;
+    font-weight: bold;
   }
 
   #personal-profile-content {

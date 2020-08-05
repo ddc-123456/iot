@@ -20,6 +20,7 @@ const PersonalCourse = () => import('views/profile/childComps/ProfileMainCourse'
 const PersonalProfile = () => import('views/profile/childComps/ProfileMainPersonalProfile')
 const PersonalHomePage = () => import('views/profile/childComps/ProfileMainHomePage')
 const PersonalPasswordManager = () => import('views/profile/childComps/ProfileMainPassWordManager')
+const ProfileChangeHomePage = () => import('views/profile/childComps/ProfileChangeHomePage')
 
 const routes = [
   {
@@ -91,29 +92,34 @@ const routes = [
     children: [
       {
         path: '',
-        redirect:'PersonalCourse'
+        redirect: 'PersonalCourse'
       },
       {
         path: 'PersonalCourse',
         component: PersonalCourse,
-        name:'PersonalCourse'
+        name: 'PersonalCourse'
       },
       {
         path: 'PersonalProfile',
         component: PersonalProfile,
-        name:'PersonalProfile'
+        name: 'PersonalProfile'
       },
       {
         path: 'PersonalHomePage',
         component: PersonalHomePage,
-        name:'PersonalHomePage'
+        name: 'PersonalHomePage',
       },
       {
         path: 'PersonalPasswordManager',
         component: PersonalPasswordManager,
-        name:'PersonalPasswordManager'
+        name: 'PersonalPasswordManager'
       }
     ]
+  },
+  {
+    path: '/ChangeProfilePage',
+    component: ProfileChangeHomePage,
+    name:'ChangeProfilePage'
   }
 ]
 

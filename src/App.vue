@@ -52,8 +52,9 @@
 
   body {
     overflow-x: hidden;
-    min-width: 1516px;
+    min-width: 1061px;
   }
+
 
 
 </style>

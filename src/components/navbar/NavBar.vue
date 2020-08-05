@@ -1,5 +1,5 @@
 <template>
-  <el-row id="nav-bar" v-show="isShow">
+  <el-row id="nav-bar" v-if="isShow">
     <!--left-->
     <el-col :span="5" class="grid-content grid-left">
       <span>物联网应用技术专业</span>
@@ -75,7 +75,7 @@
     watch: {
       '$route'(to, from) {
         this.activeIndex = this.$route.name
-        this.isShow = this.$route.name !== 10  /*当处于login界面时，navBar不显示*/
+        this.isShow = this.$route.name !== 10 && this.$route.name !== 'ChangeProfilePage' /*当处于login界面时，navBar不显示*/
       }
     },
     methods: {
@@ -84,7 +84,6 @@
       }
     },
     mounted() {
-
     }
   }
 </script>

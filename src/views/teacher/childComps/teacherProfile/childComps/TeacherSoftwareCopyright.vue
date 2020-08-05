@@ -1,6 +1,6 @@
 <template>
   <div>
-    <teacher-item id="content">
+    <teacher-item id="content" table="softwarecopyright">
       <span slot="title-name">软件著作权</span>
       <ul slot="content">
         <li v-for="(item,index) of t_teachersoftwarecopyright" :key="index">

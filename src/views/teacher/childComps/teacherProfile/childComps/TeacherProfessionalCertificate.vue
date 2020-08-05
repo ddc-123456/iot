@@ -1,6 +1,6 @@
 <template>
   <div>
-    <teacher-item id="content">
+    <teacher-item id="content" table="certificate">
       <span slot="title-name">职业资格证书</span>
       <ul slot="content">
         <li v-for="(item,index) of t_teacherprofessionalcertificate" :key="index">

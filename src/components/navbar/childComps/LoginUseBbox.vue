@@ -42,7 +42,7 @@
             this.$store.commit('setShowOfUserBox', false)
             this.$store.commit('setloginCode', 1)
             this.$message('用户：' + this.t_name + ' 已退出');
-            this.$router.push('/login')
+            this.$router.push('/index')
             break;
         }
       }

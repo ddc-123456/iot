@@ -68,7 +68,7 @@
         t_patent: {},
         t_thesis: {},
         t_honour: {},
-        t_teacherstudyexperience:{},
+        t_teacherstudyexperience: {},
         t_workexperience: '',
         t_teachersoftwarecopyright: {},
         t_teacherprofessionalcertificate: {},
@@ -87,6 +87,7 @@
     methods: {
       getTeacherProfile(t_id) {
         this.$api.teacherProfile.getTeacherProfile(t_id).then(res => {
+          // console.log(res);
           this.teacher_profile = res[0][0]
           this.t_picture = res[0][0].t_picture
           this.t_personalprofile = res[0][0].t_personalprofile
@@ -97,9 +98,9 @@
           this.t_teacherrecord = res[5]
           this.t_teacherprofessionalcertificate = res[6]
           this.t_teachertakingstudentcompetition = res[7]
-          this.t_teacherresearchprojecthortopics = res[8][0]
-          this.t_teacherresearchprojecthortopicsscientificresearch = res[8][1]
-          this.t_teacherresearchprojecthortopicsteachingtopics = res[8][2]
+          this.t_teacherresearchprojecthortopics = res[8][0].hortopics
+          this.t_teacherresearchprojecthortopicsscientificresearch = res[8][1].scientific_researches
+          this.t_teacherresearchprojecthortopicsteachingtopics = res[8][2].teaching_topics
           this.t_teacherstudyexperience = res[9]
           this.t_workexperience = res[10]
         }).catch(err => {

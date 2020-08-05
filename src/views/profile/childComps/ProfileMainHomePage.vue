@@ -1,10 +1,16 @@
 <template>
-<h1>个人主页</h1>
+<teacher-profile-list/>
 </template>
 
 <script>
+  import TeacherProfileList from "./TeacherProfileList";
   export default {
-    name: "ProfileMainHomePage"
+    name: "ProfileMainHomePage",
+    components: {TeacherProfileList},
+    mounted() {
+      this.$bus.$emit('isShow',true)
+
+    }
   }
 </script>
 

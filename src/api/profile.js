@@ -25,13 +25,13 @@ function postProfile(t_name, t_sex, t_id, t_birthday, t_email, t_phone, t_educat
   })
 }
 
-function BatchExport(formData,getComplete) {
+function BatchExport(formData, getComplete) {
   return axios.post('/profile/upload', formData, {
     headers: {
       "Content-Type": "multipart/form-data;charset=UTF-8"
     },
     onUploadProgress: function (progressEvent) {
-      let complete = (progressEvent.loaded  / progressEvent.total * 100 | 0) + "%"
+      let complete = (progressEvent.loaded / progressEvent.total * 100 | 0) + "%"
       getComplete(complete)
     }
   })
@@ -45,15 +45,40 @@ function toChangePassword(t_id, pwd, t_pwd) {
   })
 }
 
-function sendIcon(t_id, base64,getComplete) {
+function sendIcon(t_id, base64, getComplete) {
   return axios.post('/account/icon', {
     t_id,
     base64
-  },{
+  }, {
     onUploadProgress: function (progressEvent) {
-      let complete = (progressEvent.loaded  / progressEvent.total * 100 | 0)
+      let complete = (progressEvent.loaded / progressEvent.total * 100 | 0)
       getComplete(complete)
     }
+  })
+}
+
+function getTeacherProfileList(t_id) {
+  return axios.get('/profile/setting', {
+    params: {
+      t_id
+    }
+  })
+}
+
+/*ChangeHomePage:删除表格选中项，id是唯一标识*/
+function deleteChoose(multipleSelection) {
+  /*自定义键，后端的奇怪需求*/
+  let key = multipleSelection[0].table
+  return axios.post('/profile/deleteProfile', {
+    [key]: multipleSelection
+  })
+}
+
+/*ChangeHomePage:编辑完成提交数据*/
+function insertProfile(row) {
+  let key = row.table
+  return axios.post('/profile/insertProfile', {
+    [key]: row
   })
 }
 
@@ -62,5 +87,8 @@ export default {
   getTeacherProfile,
   postProfile,
   BatchExport,
-  toChangePassword
+  toChangePassword,
+  getTeacherProfileList,
+  deleteChoose,
+  insertProfile
 }

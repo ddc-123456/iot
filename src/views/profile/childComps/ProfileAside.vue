@@ -1,7 +1,7 @@
 <template>
   <div id="profile-aside">
     <div class="img-box">
-<!--      <img :src="$url+$store.state.t_picture" alt="" @click="dialogVisible = true" :key="picture">-->
+      <!--      <img :src="$url+$store.state.t_picture" alt="" @click="dialogVisible = true" :key="picture">-->
       <el-image :src="$url+$store.getters.getIconAndTime" alt="" @click="dialogVisible = true"/>
       <p>{{t_name}}</p>
     </div>
@@ -34,7 +34,7 @@
       width="39%"
       top="5vh"
       :before-close="handleClose">
-      <upload-picture ref="uploadPicture"  v-loading="loading"/>
+      <upload-picture ref="uploadPicture" v-loading="loading"/>
       <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
     <el-button type="primary" @click="getImg">提交修改</el-button>
@@ -52,10 +52,9 @@
     data() {
       return {
         t_name: this.$store.state.t_name,
-        activeIndex: 'PersonalCourse',
+        activeIndex: this.$route.name,
         dialogVisible: false,
         loading: false,
-
       }
     },
     methods: {
@@ -96,7 +95,10 @@
     watch: {
       '$route'(to, from) {
         this.activeIndex = this.$route.name
+        console.log(this.activeIndex);
       },
+    },
+    mounted() {
     }
   }
 </script>

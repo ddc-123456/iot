@@ -1,6 +1,6 @@
 <template>
 <div>
-  <teacher-item id="content">
+  <teacher-item id="content" table="thesis">
     <span slot="title-name">发表论文</span>
     <ul slot="content">
       <li v-for="(item,index) of t_thesis">

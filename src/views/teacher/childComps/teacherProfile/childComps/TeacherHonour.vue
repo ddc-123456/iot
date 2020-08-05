@@ -1,6 +1,6 @@
 <template>
   <div>
-    <teacher-item id="content">
+    <teacher-item id="content" table="honour">
       <span slot="title-name">个人荣誉</span>
       <ul slot="content">
         <li v-for="(item,index) of t_honour" :key="index">

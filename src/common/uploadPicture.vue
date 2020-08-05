@@ -111,7 +111,7 @@
       uploadChange(data) {
         if (this.myCropper) this.myCropper.destroy()
 
-        const rule = /(.*)\.(jpg|jpeg|png)$/
+        const rule = /(.*)\.(jpg|jpeg|png)$/i
 
         let file = data.target.files[0]
         if (!file) return

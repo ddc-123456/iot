@@ -1,6 +1,6 @@
 <template>
   <div id="teacher-personal-introduction">
-    <teacher-item id="content">
+    <teacher-item id="content" :table="table">
       <span slot="title-name">个人简介</span>
       <p slot="content">{{t_personalprofile}}</p>
     </teacher-item>
@@ -15,7 +15,12 @@
     components: {TeacherItem},
     props:{
       t_personalprofile:''
-    }
+    },
+    data(){
+      return{
+        table:['teacher']
+      }
+    },
   }
 </script>
 
