@@ -24,8 +24,9 @@ import qs from 'qs'
 /*
   设置超时时间和跨域是否允许携带凭证
 */
-// axios.defaults.baseURL = 'http://120.78.153.151:8080/ssm' /*生产时url*/
-axios.defaults.baseURL = '/api'  /*开发时url*/
+// axios.defaults.baseURL = '/api'  /*开发时url*/
+axios.defaults.baseURL = '/api'  /*生产时url*/
+// axios.defaults.baseURL = 'http://192.168.191.1:8082/api'  /*生产时url*/
 // axios.defaults.timeout = 1000000
 axios.defaults.withCredentials = true
 

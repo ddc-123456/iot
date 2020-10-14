@@ -308,7 +308,7 @@
         }
       },
 
-      getSpecialtyList(){
+      getSpecialtyList() {
         for (let item of this.departmentList) {
           if (item.t_department === this.t_department) {
             this.specialtyList = item.specialtyName
@@ -332,7 +332,11 @@
           this.t_title,
           this.t_department,
           this.t_specialtyName).then(res => {
-          this.$message.success('资料已提交')
+          if (res.code === 200) {
+            window.localStorage.setItem('t_name',this.t_name)
+            this.$store.commit('setName',this.t_name)
+            this.$message.success('资料已提交')
+          }else this.$message.warning('资料提交失败，请检查网络')
         }).catch(err => {
           console.log(err);
         })

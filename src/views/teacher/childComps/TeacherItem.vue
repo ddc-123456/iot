@@ -33,10 +33,7 @@
       }
     },
     props: {
-      table: {
-        type: Array,
-        default: () => []
-      }
+      table: ''
     },
     mounted() {
       this.$bus.$on('isShow', res => {

@@ -12,7 +12,7 @@ Vue.config.productionTip = false
 Vue.prototype.$api = api
 Vue.prototype.$bus = new Vue()
 
-// Vue.prototype.$url = 'http://120.78.153.151:8080/ssm/'  /*生产时url*/
+// Vue.prototype.$url = 'http://10.18.5.173:8080/'  /*生产时url*/
 Vue.prototype.$url = '/api' /*开发时url*/
 
 new Vue({

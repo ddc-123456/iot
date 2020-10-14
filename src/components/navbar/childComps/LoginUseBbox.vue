@@ -34,7 +34,8 @@
       handleCommand(command) {
         switch (command) {
           case 'personalCentre' :
-            this.$router.push('/profile')
+            this.$store.state.loginCode !== 100 ? this.$router.push('/login') : this.$router.push('/profile')
+
             break;
 
           case 'exit' :

@@ -3,7 +3,7 @@
     <div class="img-box">
       <!--      <img :src="$url+$store.state.t_picture" alt="" @click="dialogVisible = true" :key="picture">-->
       <el-image :src="$url+$store.getters.getIconAndTime" alt="" @click="dialogVisible = true"/>
-      <p>{{t_name}}</p>
+      <p>{{$store.state.t_name}}</p>
     </div>
     <ul>
       <li>

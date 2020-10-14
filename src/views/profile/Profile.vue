@@ -17,9 +17,10 @@
   export default {
     name: "Profile",
     components: {ProfileAside},
-    mounted() {
-      console.log('跳转到登陆'+this.$store.state.loginCode);
-      this.$store.state.loginCode !== 100 ? this.$router.push('/login') : null
+    watch: {
+      '$route'(to, from) {
+        this.$store.state.loginCode !== 100 ? this.$router.push('/login') : null
+      }
     }
   }
 </script>

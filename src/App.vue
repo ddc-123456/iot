@@ -15,33 +15,44 @@
 
   export default {
     name: "App",
+    data() {
+      return {
+        loading: false
+      }
+    },
     components: {
       NavBar
     },
     created() {
-
-      /*每次刷新时校验登陆状态*/
-      this.checkLogin()
       this.getVuex()
     },
     methods: {
       getVuex() {
-        this.$store.commit('setName',window.localStorage.getItem('t_name'))
-        this.$store.commit('setIcon',window.localStorage.getItem('t_picture'))
-        this.$store.commit('setId',window.localStorage.getItem('t_id'))
+        this.$store.commit('setName', window.localStorage.getItem('t_name'))
+        this.$store.commit('setIcon', window.localStorage.getItem('t_picture'))
+        this.$store.commit('setId', window.localStorage.getItem('t_id'))
       },
 
       /*登陆状态校验*/
       async checkLogin() {
+        console.log(this.$store.state.loginCode);
+        this.loading = true
         await this.$api.app.checkLogin().then(res => {
-          this.$store.commit("setloginCode",res.code)
+          this.$store.commit("setloginCode", res.code)
           res.code === 100 ? this.$store.commit("setShowOfUserBox", true) : this.$store.commit("setShowOfUserBox", false)
+          this.loading = false
         }).catch(err => {
           this.$store.commit("setShowOfUserBox", false)
+          this.loading = false
           console.log(err);
         })
       }
-    }
+    },
+    watch: {
+      '$route'(to, from) {
+        this.checkLogin()
+      }
+    },
   }
 </script>
 
@@ -54,7 +65,6 @@
     overflow-x: hidden;
     min-width: 1061px;
   }
-
 
 
 </style>
