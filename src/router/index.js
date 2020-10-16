@@ -13,6 +13,13 @@ const Match = () => import('views/match/Match')
 const Forum = () => import('views/forum/Forum')
 const Student = () => import('views/student/Student')
 const Login = () => import('views/login/Login')
+
+const Document = () => import('views/document/Document')
+const DocumentCriterion = () => import('views/document/childComps/DocumentCriterion')
+const DocumentPlan = () => import('views/document/childComps/DocumentPlan')
+const DocumentTalent = () => import('views/document/childComps/DocumentTalent')
+const DocumentView = () => import('views/document/childComps/DocumentView')
+
 const Register = () => import('views/register/Register')
 const TeacherProfile = () => import('views/teacher/childComps/teacherProfile/TeacherProfile')
 const Profile = () => import('views/profile/Profile')
@@ -21,6 +28,7 @@ const PersonalProfile = () => import('views/profile/childComps/ProfileMainPerson
 const PersonalHomePage = () => import('views/profile/childComps/ProfileMainHomePage')
 const PersonalPasswordManager = () => import('views/profile/childComps/ProfileMainPassWordManager')
 const ProfileChangeHomePage = () => import('views/profile/childComps/ProfileChangeHomePage')
+
 
 const routes = [
   {
@@ -43,44 +51,75 @@ const routes = [
     name: 2,
   },
   {
+    path: '/document',
+    component: Document,
+    name: 3,
+    children: [
+      {
+        path: '',
+        redirect: 'DocumentTalent'
+      },
+      {
+        path: 'DocumentTalent',
+        component: DocumentTalent,
+        name: 'DocumentTalent'
+      },
+      {
+        path: 'DocumentCriterion',
+        component: DocumentCriterion,
+        name: 'DocumentCriterion'
+      },
+      {
+        path: 'DocumentPlan',
+        component: DocumentPlan,
+        name: 'DocumentPlan'
+      },
+      {
+        path: 'DocumentView',
+        component: DocumentView,
+        name: 'DocumentView'
+      }
+    ]
+  },
+  {
     path: '/news',
     component: News,
-    name: 3
+    name: 4
   },
   {
     path: '/course',
     component: Course,
-    name: 4
+    name: 5
   },
   {
     path: '/project',
     component: Project,
-    name: 5
+    name: 6
   },
   {
     path: '/match',
     component: Match,
-    name: 6
+    name: 7
   },
   {
     path: '/forum',
     component: Forum,
-    name: 7
+    name: 8
   },
   {
     path: '/student',
     component: Student,
-    name: 8
+    name: 9
   },
   {
     path: '/teacherProfile',
     component: TeacherProfile,
-    name: 9
+    name: 10
   },
   {
     path: '/login',
     component: Login,
-    name: 10
+    name: 11
   },
   {
     path: '/register',
@@ -119,7 +158,7 @@ const routes = [
   {
     path: '/ChangeProfilePage',
     component: ProfileChangeHomePage,
-    name:'ChangeProfilePage'
+    name: 'ChangeProfilePage'
   }
 ]
 

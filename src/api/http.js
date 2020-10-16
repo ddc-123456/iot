@@ -1,6 +1,5 @@
 import axios from 'axios'
 import qs from 'qs'
-
 /*
   根据环境变量区分接口的默认地址
 */
@@ -63,7 +62,7 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => {
   return response.data
 }, error => {
-  let {response} = error
+  let { response } = error
   if (response) {
     // 服务器有返回结果
     switch (response.status) {

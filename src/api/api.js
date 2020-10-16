@@ -9,6 +9,7 @@ import teacher from "./teacher";
 import teacherProfile from "./teacherProfile";
 import app from "./app"
 import profile from "./profile";
+import document from './document'
 
 export default {
   login,
@@ -16,5 +17,6 @@ export default {
   teacher,
   teacherProfile,
   app,
-  profile
+  profile,
+  document
 }
