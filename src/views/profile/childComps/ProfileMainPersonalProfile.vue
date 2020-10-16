@@ -338,7 +338,7 @@
             this.$message.success('资料已提交')
           }else this.$message.warning('资料提交失败，请检查网络')
         }).catch(err => {
-          console.log(err);
+
         })
       }
     }
