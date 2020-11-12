@@ -25,5 +25,9 @@ module.exports = {
       }
     }
   },
-  publicPath: "./"
+  publicPath: "/iot/",
+  outputDir: 'dist',
+  assetsDir: 'static',
+  indexPath: 'index.html',
+
 }

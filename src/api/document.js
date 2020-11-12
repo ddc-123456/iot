@@ -7,6 +7,7 @@ import axios from './http'
 function getCourseSet () {
   return axios.get('/courseSet/find_all')
 }
+
 function downLoadFile (id) {
   return axios({
     method: 'get',
@@ -17,6 +18,7 @@ function downLoadFile (id) {
     responseType: 'blob'
   })
 }
+
 function UploadFile (fromData) {
   return axios.post('/courseSet/fileupload', fromData, {
     headers: {
@@ -24,8 +26,22 @@ function UploadFile (fromData) {
     }
   })
 }
+
+function getPreview(id) {
+return axios({
+  method:'get',
+  url:'/courseSet/preview_word',
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+  },
+  params:{
+    id
+  }
+})
+}
 export default {
   getCourseSet,
   downLoadFile,
-  UploadFile
+  UploadFile,
+  getPreview
 }

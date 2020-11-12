@@ -348,7 +348,6 @@
 <style scoped>
   #container {
     background-color: #fff;
-    /*padding-bottom: 50px;*/
     margin-top: 30px;
     overflow-x: hidden;
   }

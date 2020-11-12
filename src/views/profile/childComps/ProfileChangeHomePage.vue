@@ -277,7 +277,7 @@
 
 <template>
   <div>
-    <profile-table-item v-for="item of table" :table="item"/>
+    <profile-table-item v-for="item of table" :table="item" :key="item"/>
   </div>
 </template>
 

@@ -50,7 +50,11 @@
           }
         })
 
-        window.open(ChangeHomePage.href, "_blank", "name", "height=700, width=1150, top=200, left=50, toolbar=no, menubar=no, scrollbars=no, resizable=yes,location=no, status=no");
+        window.open(
+          ChangeHomePage.href,
+          "_blank",
+          "name",
+          "height=700, width=1150, top=200, left=50, toolbar=no, menubar=no, scrollbars=no, resizable=yes,location=no, status=no");
       },
     }
   }
