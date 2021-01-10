@@ -16,9 +16,27 @@ export function formatDate(date, fmt) {
     }
   }
   return fmt;
-};
+}
 
-function padLeftZero (str) {
+function padLeftZero(str) {
   return ('00' + str).substr(str.length);
-};
+}
 
+/*用于判断目标元素是否出现在了可视区域内*/
+export function scrollToListener(el, ifScroll) {
+
+  document.addEventListener('scroll', function handleScroll(E) {
+
+    const pageHeight = document.documentElement.clientHeight; //可视页面的高度
+    const contentTop = el.getBoundingClientRect().top; //el相对于可视页面高度的距离
+    const contentHeight = el.offsetHeight; //el的高度
+
+    let result = (contentTop < pageHeight && contentTop >= 0) || (contentTop < 0 && (contentTop + contentHeight > 0));
+
+    ifScroll(result);
+
+    if (result) {
+      document.removeEventListener('scroll',handleScroll);
+    }
+  })
+}

@@ -142,13 +142,13 @@ export default {
 .grid-center a {
   flex: 1;
   color: #fff;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
 }
 
 .grid-center a:hover {
   /*border-bottom: solid var(--color-title) 3px;*/
-  font-size: 20px;
+  font-size: 16px;
   transition: 0.1s ease;
 }
 

@@ -65,6 +65,10 @@
 
   span {
     float: left;
+    width: 60px;
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .el-dropdown {

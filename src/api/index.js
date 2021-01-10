@@ -1,7 +1,7 @@
 import axios from './http'
 
 function getIndexData() {
-  return axios.post('/home/getHot')
+  return axios.post('/home/getHot');
 }
 
 export default {

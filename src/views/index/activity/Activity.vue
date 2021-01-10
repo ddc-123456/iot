@@ -3,17 +3,9 @@
     <block-header :title="'学生活动'"></block-header>
     <div class="activity-content">
       <ul>
-        <li>
-          <p class="activity-text">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-          <p class="activity-date">2020-7-1</p>
-        </li>
-        <li>
-          <p class="activity-text">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-          <p class="activity-date">2020-7-1</p>
-        </li>
-        <li>
-          <p class="activity-text">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-          <p class="activity-date">2020-7-1</p>
+        <li v-for="item of home_activities" :key="item.activity_title">
+          <p class="activity-text">{{item.activity_title}}</p>
+          <p class="activity-date">{{item.activity_time}}</p>
         </li>
       </ul>
     </div>
@@ -26,22 +18,25 @@
     name: "Activity",
     components: {
       BlockHeader
+    },
+    props:{
+      home_activities:Array
     }
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   /*学生活动*/
   .activity-block {
     height: 100%;
   }
   .activity-block .activity-content {
-    height: 200px;
-    padding: 10px;
+    height: 135px;
+    padding: 15px;
     background-color: white;
   }
   .activity-block .activity-content ul li {
-    margin-bottom: 16px;
+    margin-bottom: 10px;
   }
   .activity-block .activity-content .activity-text {
     overflow: hidden;
@@ -50,6 +45,18 @@
   .activity-block .activity-content .activity-date {
     font-size: 10px;
     display: flex;
+    position: relative;
     justify-content: flex-end;
+
+    &::after{
+      content: '';
+      position: absolute;
+      width: calc(100% - 80px);
+      height: 1px;
+      bottom: 7px;
+      left: 5px;
+      background-color: var(--color-title);
+    }
   }
+
 </style>

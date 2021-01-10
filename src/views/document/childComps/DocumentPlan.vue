@@ -119,12 +119,22 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      @current-change="handleCurrentChange"
+      layout="total, prev, pager, next"
+      :page-size="pagesize"
+      :current-page="currentPage"
+      :total="total"
+      :page-count="pageCount"
+      background
+    ></el-pagination>
     <input
       type="file"
       ref="upload"
       style="display:none"
+      v-if="isInputShow"
       @change="uploadChange"
-    >
+    />
     <el-dialog
       title="预览"
       :visible.sync="dialogVisible"
@@ -134,7 +144,8 @@
       @open="scrollListener"
       destroy-on-close>
       <div class="preview-container" ref="preview">
-        <document-view :src="url"/>
+        <document-view :src="url"
+                       :page="currentPagePDF"/>
       </div>
       <span slot="footer" class="dialog-footer">
 <!--    <el-button @click="dialogVisible = false">取 消</el-button>-->
@@ -146,6 +157,7 @@
 <script>
   import XLSX from 'xlsx'
   import DocumentView from "./DocumentView";
+  import pdf from 'vue-pdf'
 
   export default {
     components: {DocumentView},
@@ -157,16 +169,26 @@
         row_id: '',
         dialogVisible: false,
         url: '',
+        complete: '',
+        pageNum: 0,//pdf
+        pagesize: 0,//分页
+        currentPage: 1,
+        total: 0,
+        pageCount: 0,
+        tags: [],
+        isInputShow: true,
       }
     },
     mounted() {
-      this.getCourseSet()
+    },
+
+    created() {
+      this.getList({page: this.currentPage, query: this.tags})
     },
     methods: {
       //! 获取教学计划表数据
       getCourseSet() {
         this.$api.document.getCourseSet().then(res => {
-          console.log(res)
           this.tableData = res
         }).catch(e => {
           console.log(e)
@@ -176,12 +198,12 @@
       scrollListener() {
         this.$nextTick(() => {
           const box = this.$refs.preview
-          box.addEventListener('scroll',()=>{
-            if (box.scrollTop + box.clientHeight === box.scrollHeight){
+          box.addEventListener('scroll', () => {
+            if (box.scrollTop + box.clientHeight === box.scrollHeight) {
               this.$notify.info({
                 title: '提示',
                 message: '已到达底部，预览功能最多预览5页',
-                offset:400
+                offset: 400
               });
             }
           })
@@ -196,11 +218,15 @@
        *  “https://view.officeapps.live.com/op/view.aspx?src=” + API_URL + “/zhengCe?id=” + row.id,
        *  “_blank”);
        */
+      //预览
       async viewFile(row) {
         this.dialogVisible = true
-        this.url = await this.$api.document.getPreview(row.id)
+        const {map} = await this.$api.document.getPreview(row.id).catch()
+        this.url = this.$url + map.fileUrl
+        this.pageNum = map.pages
 
       },
+
       handleClose(done) {
         done()
       },
@@ -211,27 +237,71 @@
         a.click()
         document.removeChild(a)
       },
+
       uploadFile(row) {
         this.$refs.upload.click()
         this.row_id = row.id
       },
+
       uploadChange(data) {
-        console.log(data)
-        console.log(this.row_id)
+        this.isInputShow = false
         let file = data.target.files[0]
+        console.log(file);
         if (!file) return
         let formData = new FormData()
         formData.append('upload', file)
         formData.append('id', this.row_id)
         // formData.append('t_id', this.$store.state.t_id.toString())
-        this.$api.document.UploadFile(formData).then(res => {
-          file.value = ''
-          this.row_id = ''
-          console.log(res);
+        this.$api.document.UploadFile(formData, (complete) => {
+          this.complete = complete
+          console.log(this.complete);
+        }).then(res => {
+          this.isInputShow = true
+          if (res.meta.status === 200) {
+            this.$notify({
+              title: '提醒',
+              message: res.meta.msg,
+              type: 'success'
+            })
+          } else {
+            this.isInputShow = true
+            this.$notify({
+              title: '提醒',
+              message: res.meta.msg,
+              type: 'error'
+            })
+            file.value = ''
+            this.row_id = ''
+            console.log(res);
+          }
         }).catch(err => {
           this.$message.error('上传了超过100M大小的文件或服务器未知错误')
           console.log(err);
         })
+      },
+
+      handleCurrentChange(currentPage) {
+        const query = Object.assign([], this.tags)
+        this.currentPage = currentPage
+        this.getList({page: currentPage, query})
+      },
+
+      getList(data) {
+        this.$api.document.fetchList(data).then(res => {
+          console.log(res);
+          this.tableData = res.message
+          this.total = res.listQuery.total
+          this.currentPage = res.listQuery.pageNum
+          this.pagesize = res.listQuery.pageSize
+          this.pageCount = res.listQuery.pages
+        })
+      },
+    },
+    computed: {
+      currentPagePDF: function () {
+        if (this.pageNum > 10) {
+          return 10
+        } else return this.pageNum
       }
     }
   }

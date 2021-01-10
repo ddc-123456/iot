@@ -11,6 +11,7 @@
 </template>
 
 <script>
+
   import NavBar from "components/navbar/NavBar";
 
   export default {

@@ -1,16 +1,18 @@
 <template>
   <swiper class="swiper-container" :options="swiperOptions">
-    　　 <div class="swiper-slide" :key="banner" v-for="banner in banners">
-    <img :src="banner" />
-  </div>
-    　　<div class="swiper-pagination" slot="pagination"></div>
+    　　
+    <div class="swiper-slide" :key="item.id" v-for="item of home_swipers">
+      <img :src="$url+item.swiperPicture"/>
+    </div>
+    　　
+    <div class="swiper-pagination" slot="pagination"></div>
     　　<!--<div class="swiper-button-prev" slot="button-prev"></div>
   　　<div class="swiper-button-next" slot="button-next"></div>-->
   </swiper>
 </template>
 
 <script>
-  import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+  import {Swiper, SwiperSlide} from 'vue-awesome-swiper'
   import 'swiper/css/swiper.css'
 
   export default {
@@ -18,6 +20,9 @@
     components: {
       Swiper,
       SwiperSlide
+    },
+    props: {
+      home_swipers: Array
     },
     data() {
       return {
@@ -55,6 +60,7 @@
     height: 405px;
     --swiper-theme-color: #d3dce6;
   }
+
   .swiper-slide img {
     width: 100%;
     height: 100%;
