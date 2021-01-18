@@ -36,7 +36,48 @@ export function scrollToListener(el, ifScroll) {
     ifScroll(result);
 
     if (result) {
-      document.removeEventListener('scroll',handleScroll);
+      document.removeEventListener('scroll', handleScroll);
     }
   })
+}
+
+export function scrollToTarget(index) {
+  const
+    targetList = document.querySelectorAll('.content'),
+    targetOffsetTop = targetList[index].offsetTop,
+    STEP = 50;
+
+  let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+  targetOffsetTop && scrollTop > targetOffsetTop
+    ? smoothUp()
+    : smoothDown();
+
+  function smoothUp() {
+    if (scrollTop > targetOffsetTop) {
+      scrollTop - targetOffsetTop >= STEP
+        ? scrollTop -= STEP
+        : scrollTop = targetOffsetTop;
+
+      document.body.scrollTop = scrollTop;
+      document.documentElement.scrollTop = scrollTop;
+
+      requestAnimationFrame(smoothUp);
+    }
+  }
+
+  function smoothDown() {
+    if (scrollTop < targetOffsetTop) {
+      targetOffsetTop - scrollTop >= STEP
+        ? scrollTop += STEP
+        : scrollTop = targetOffsetTop;
+
+      document.body.scrollTop = scrollTop;
+      document.documentElement.scrollTop = scrollTop;
+
+      requestAnimationFrame(smoothDown);
+    }
+  }
+
+
 }

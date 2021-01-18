@@ -3,13 +3,14 @@
 */
 
 // 使用示例：this.$api.login.login()
-import login from "./login"
-import index from "./index"
+import login from "./login";
+import index from "./index";
 import teacher from "./teacher";
 import teacherProfile from "./teacherProfile";
-import app from "./app"
+import app from "./app";
 import profile from "./profile";
-import document from './document'
+import document from './document';
+import feature from './feature';
 
 export default {
   login,
@@ -18,5 +19,6 @@ export default {
   teacherProfile,
   app,
   profile,
-  document
+  document,
+  feature
 }

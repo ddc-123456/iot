@@ -3,7 +3,7 @@
     <block-header :title="'热点'"></block-header>
     <el-row class="hot-content">
       <el-col :span="10" class="hot-left">
-        <img src="~assets/img/kaws.jpg">
+        <img :src="$url+`images/swiper/d.jpg`">
       </el-col>
       <el-col :span="10" class="hot-right">
         <ul class="hot-ul">
@@ -27,10 +27,7 @@
       BlockHeader
     },
     props: {
-      hotPoint:Array,
-    },
-    mounted() {
-
+      hotPoint: Array,
     },
     methods: {}
   }
@@ -78,7 +75,7 @@
     position: relative;
   }
 
-  .hot-block .hot-right .hot-date::after{
+  .hot-block .hot-right .hot-date::after {
     content: '';
     position: absolute;
     width: calc(100% - 80px);

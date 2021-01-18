@@ -54,10 +54,37 @@ function fetchList(data) {
   })
 }
 
+function fetchTalentDocument() {
+  return axios({
+    url: '/talents/depAndVer',
+    method: 'get'
+  })
+}
+
+function fetchSearch(data) {
+  return axios({
+    url: '/talents/findTalents',
+    method: 'post',
+    data
+  })
+}
+
+function postAddClass(data) {
+  return axios({
+    url: '/talents/add',
+    method: 'post',
+    data
+  })
+}
+
+
 export default {
   getCourseSet,
   downLoadFile,
   UploadFile,
   getPreview,
-  fetchList
+  fetchList,
+  fetchTalentDocument,
+  fetchSearch,
+  postAddClass
 }

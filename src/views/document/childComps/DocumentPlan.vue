@@ -1,158 +1,184 @@
 <template>
-  <div id="documentplan">
-    <div style="height:126px"></div>
-    <!-- 列表 -->
-    <el-table
-      :data="tableData"
-      border
-      style="width: 100%"
-      :fit="true"
-      highlight-current-row
-    >
-      <el-table-column
-        prop="id"
-        label="ID"
-        align="center"
-        :resizable="false"
-      >
-      </el-table-column>
-      <el-table-column
-        align="center"
-        :resizable="false"
-        prop="term"
-        label="学期"
-      >
-      </el-table-column>
-      <el-table-column
-        align="center"
-        :resizable="false"
-        prop="course_name"
-        label="课程名称"
-      >
-      </el-table-column>
-      <el-table-column
-        :resizable="false"
-        align="center"
-        prop="specialty_id"
-        label="开设专业"
-      >
-      </el-table-column>
-      <el-table-column
-        :resizable="false"
-        align="center"
-        prop="t_id"
-        label="任课教师"
-        width="100"
-      >
-      </el-table-column>
-      <el-table-column
-        align="center"
-        :resizable="false"
-        prop="class_hour"
-        label="学时"
-      >
-      </el-table-column>
-      <el-table-column
-        align="center"
-        :resizable="false"
-        :show-overflow-tooltip="true"
-        label="授课计划"
-      >
-        <template slot-scope="scope">
-          {{scope.row.teaching_plan}}
-        </template>
-      </el-table-column>
-      <el-table-column
-        align="center"
-        :resizable="false"
-        prop="submit_state"
-        label="提交状态"
-      >
-      </el-table-column>
-      <el-table-column
-        align="center"
-        :resizable="false"
-        prop="address"
-        label="提交时间"
-      >
-      </el-table-column>
+  <el-row class="container">
+    <el-row class="toolBox">
+      <el-row type="flex" justify="end" align="middle">
 
-      <el-table-column
-        :resizable="false"
-        label="操作"
-        width="180"
-        fixed="right"
-        align="center"
-      >
-        <template slot-scope="{row}">
-          <!-- 预览 -->
-          <el-button
-            size="mini"
-            icon="el-icon-view"
-            @click="viewFile(row)"
-          >
-          </el-button>
-          <!-- 上传 -->
-          <el-button
-            size="mini"
-            icon="el-icon-upload2"
-            @click="uploadFile(row)"
-          >
-          </el-button>
+        <el-col class="plan-version" :span="8">
+          <span>班级：</span>
+          <el-select v-model="version"
+                     size="mini"
+                     style="width: 90px">
+            <el-option v-for="item of versionList"
+                       :key="item.id"
+                       :label="item.ver"
+                       :value="item.ver"/>
+          </el-select>
+        </el-col>
 
-          <!-- 下载 -->
-          <el-button
-            size="mini"
-            icon="el-icon-download"
-            @click="downloadFile(row)"
+        <el-col :span="5">
+          <el-button class="search" @click="onSearchButtonClick">查询</el-button>
+        </el-col>
+      </el-row>
+    </el-row>
+    <div id="documentplan">
+      <!-- 列表 -->
+      <div class="table-container" ref="tab">
+        <div ref="elTab">
+          <el-table
+            v-loading="loading"
+            :data="tableData"
+            border
+            style="width: 100%"
+            :fit="true"
+            highlight-current-row
           >
-          </el-button>
+            <el-table-column
+              prop="id"
+              label="ID"
+              align="center"
+              :resizable="false"
+            >
+            </el-table-column>
+            <el-table-column
+              align="center"
+              :resizable="false"
+              prop="term"
+              label="学期"
+            >
+            </el-table-column>
+            <el-table-column
+              align="center"
+              :resizable="false"
+              prop="course_name"
+              label="课程名称"
+            >
+            </el-table-column>
+            <el-table-column
+              :resizable="false"
+              align="center"
+              prop="specialty_id"
+              label="开设专业"
+            >
+            </el-table-column>
+            <el-table-column
+              :resizable="false"
+              align="center"
+              prop="t_id"
+              label="任课教师"
+              width="100"
+            >
+            </el-table-column>
+            <el-table-column
+              align="center"
+              :resizable="false"
+              prop="class_hour"
+              label="学时"
+            >
+            </el-table-column>
+            <el-table-column
+              align="center"
+              :resizable="false"
+              :show-overflow-tooltip="true"
+              label="授课计划"
+            >
+              <template slot-scope="scope">
+                {{scope.row.teaching_plan}}
+              </template>
+            </el-table-column>
+            <el-table-column
+              align="center"
+              :resizable="false"
+              prop="submit_state"
+              label="提交状态"
+            >
+            </el-table-column>
+            <el-table-column
+              align="center"
+              :resizable="false"
+              prop="address"
+              label="提交时间"
+            >
+            </el-table-column>
 
-          <!--! 测试下载 start -->
-          <!-- {{row}} -->
-          <!-- <div>
-            <a :href="API_URL+'?id='+row.id">
-              <i class="el-icon-download"></i>
-            </a>
-          </div> -->
-          <!--! 测试下载 end -->
-        </template>
-      </el-table-column>
-    </el-table>
-    <el-pagination
-      @current-change="handleCurrentChange"
-      layout="total, prev, pager, next"
-      :page-size="pagesize"
-      :current-page="currentPage"
-      :total="total"
-      :page-count="pageCount"
-      background
-    ></el-pagination>
-    <input
-      type="file"
-      ref="upload"
-      style="display:none"
-      v-if="isInputShow"
-      @change="uploadChange"
-    />
-    <el-dialog
-      title="预览"
-      :visible.sync="dialogVisible"
-      width="60%"
-      top="5vh"
-      :before-close="handleClose"
-      @open="scrollListener"
-      destroy-on-close>
-      <div class="preview-container" ref="preview">
-        <document-view :src="url"
-                       :page="currentPagePDF"/>
+            <el-table-column
+              :resizable="false"
+              label="操作"
+              width="180"
+              fixed="right"
+              align="center"
+            >
+              <template slot-scope="{row}">
+                <!-- 预览 -->
+                <el-button
+                  size="mini"
+                  icon="el-icon-view"
+                  @click="viewFile(row)"
+                >
+                </el-button>
+                <!-- 上传 -->
+                <el-button
+                  size="mini"
+                  icon="el-icon-upload2"
+                  @click="uploadFile(row)"
+                >
+                </el-button>
+
+                <!-- 下载 -->
+                <el-button
+                  size="mini"
+                  icon="el-icon-download"
+                  @click="downloadFile(row)"
+                >
+                </el-button>
+
+                <!--! 测试下载 start -->
+                <!-- {{row}} -->
+                <!-- <div>
+                  <a :href="API_URL+'?id='+row.id">
+                    <i class="el-icon-download"></i>
+                  </a>
+                </div> -->
+                <!--! 测试下载 end -->
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
       </div>
-      <span slot="footer" class="dialog-footer">
+      <el-pagination
+        @current-change="handleCurrentChange"
+        layout="total, prev, pager, next"
+        :page-size="pagesize"
+        :current-page="currentPage"
+        :total="total"
+        :page-count="pageCount"
+        background
+      ></el-pagination>
+      <input
+        type="file"
+        ref="upload"
+        style="display:none"
+        v-if="isInputShow"
+        @change="uploadChange"
+      />
+      <el-dialog
+        title="预览"
+        :visible.sync="dialogVisible"
+        width="60%"
+        top="5vh"
+        :before-close="handleClose"
+        @open="scrollListener"
+        destroy-on-close>
+        <div class="preview-container" ref="preview">
+          <document-view :src="url"
+                         :page="currentPagePDF"/>
+        </div>
+        <span slot="footer" class="dialog-footer">
 <!--    <el-button @click="dialogVisible = false">取 消</el-button>-->
     <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
   </span>
-    </el-dialog>
-  </div>
+      </el-dialog>
+    </div>
+  </el-row>
 </template>
 <script>
   import XLSX from 'xlsx'
@@ -177,6 +203,8 @@
         pageCount: 0,
         tags: [],
         isInputShow: true,
+        loading: true,
+        classSelect:0
       }
     },
     mounted() {
@@ -189,7 +217,7 @@
       //! 获取教学计划表数据
       getCourseSet() {
         this.$api.document.getCourseSet().then(res => {
-          this.tableData = res
+          this.tableData = res;
         }).catch(e => {
           console.log(e)
         })
@@ -224,7 +252,6 @@
         const {map} = await this.$api.document.getPreview(row.id).catch()
         this.url = this.$url + map.fileUrl
         this.pageNum = map.pages
-
       },
 
       handleClose(done) {
@@ -233,14 +260,14 @@
       //! 文件下载
       downloadFile(row) {
         var a = document.createElement('a')
-        a.href = this.API_URL + '?id=' + row.id
-        a.click()
-        document.removeChild(a)
+        a.href = this.API_URL + '?id=' + row.id;
+        a.click();
+        document.removeChild(a);
       },
 
       uploadFile(row) {
-        this.$refs.upload.click()
-        this.row_id = row.id
+        this.$refs.upload.click();
+        this.row_id = row.id;
       },
 
       uploadChange(data) {
@@ -256,7 +283,7 @@
           this.complete = complete
           console.log(this.complete);
         }).then(res => {
-          this.isInputShow = true
+          this.isInputShow = true;
           if (res.meta.status === 200) {
             this.$notify({
               title: '提醒',
@@ -264,7 +291,7 @@
               type: 'success'
             })
           } else {
-            this.isInputShow = true
+            this.isInputShow = true;
             this.$notify({
               title: '提醒',
               message: res.meta.msg,
@@ -282,31 +309,76 @@
 
       handleCurrentChange(currentPage) {
         const query = Object.assign([], this.tags)
-        this.currentPage = currentPage
+        this.currentPage = currentPage;
         this.getList({page: currentPage, query})
       },
 
       getList(data) {
         this.$api.document.fetchList(data).then(res => {
-          console.log(res);
-          this.tableData = res.message
-          this.total = res.listQuery.total
-          this.currentPage = res.listQuery.pageNum
-          this.pagesize = res.listQuery.pageSize
-          this.pageCount = res.listQuery.pages
+
+          this.tableData = res.message;
+          this.total = res.listQuery.total;
+          this.currentPage = res.listQuery.pageNum;
+          this.pagesize = res.listQuery.pageSize;
+          this.pageCount = res.listQuery.pages;
+
+          this.loading = false;
         })
       },
+
+      async onSearchButtonClick() {
+        this.tableData = await this.$api.document.fetchSearch(classSelect);
+        console.log(this.tableData);
+      }
     },
     computed: {
       currentPagePDF: function () {
         if (this.pageNum > 10) {
           return 10
-        } else return this.pageNum
+        } else return this.pageNum;
+      }
+    },
+    watch: {
+      tableData: function () {
+        this.$nextTick(() => {
+          const size = this.$refs.tab;
+          const preSize = this.$refs.elTab;
+          size.style.height = preSize.clientHeight + 'px';
+        })
       }
     }
   }
 </script>
-<style scoped>
+<style scoped lang="scss">
+  .container {
+    margin-top: 100px;
+
+    .toolBox {
+      background-color: #E6CDA4;
+      padding: 10px 0;
+      border-radius: 10px 10px 0 0;
+
+      .plan-version {
+      }
+
+      .apartment {
+      }
+
+      .search {
+      }
+
+      .reset {
+      }
+
+    }
+  }
+
+  .table-container {
+    transition: all 0.5s ease;
+    width: 100%;
+    overflow-y: hidden;
+  }
+
   .preview-container {
     height: 70vh;
     overflow: auto;

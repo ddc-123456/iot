@@ -54,7 +54,7 @@
         this.$api.teacher.getSwiperPictureAndIntroduction().then(res => {
           this.swiperPicture = res.rotationChart1
           this.teacherIntroduction = res.teacherProfile
-          // console.log(res);
+          console.log(res);
         }).catch(err => {
           console.log(err);
         })

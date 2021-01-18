@@ -14,6 +14,7 @@
 
   import NavBar from "components/navbar/NavBar";
 
+
   export default {
     name: "App",
     data() {
@@ -25,8 +26,9 @@
       NavBar
     },
     created() {
-      this.getVuex()
+      this.getVuex();
     },
+
     methods: {
       getVuex() {
         this.$store.commit('setName', window.localStorage.getItem('t_name'))

@@ -4,8 +4,11 @@ import router from './router'
 import api from './api/api'
 import store from './store'
 import ElementUI from 'element-ui'
+//import Mock from "./common/mock";
+
 
 const anime = require('animejs/lib/anime');
+
 
 Vue.use(ElementUI);
 
