@@ -15,7 +15,7 @@
     "cropperjs": "^1.5.7",
     "element-ui": "^2.13.2",
     "mockjs": "^1.1.0",
-    "qs": "^6.9.4",
+    "qs": "^6.9.7",
     "swiper": "^5.4.5",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^4.1.1",
